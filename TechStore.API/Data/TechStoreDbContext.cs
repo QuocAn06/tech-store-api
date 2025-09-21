@@ -8,5 +8,22 @@ namespace TechStore.API.Data
         public TechStoreDbContext(DbContextOptions<TechStoreDbContext> options): base(options) { }
 
         public DbSet<Product> Products { get; set; }
+        public DbSet<Category> Categories { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // Cấu hình Product
+            modelBuilder.Entity<Product>()
+                .Property(p => p.Price)
+                .HasColumnType("decimal(18,2)");
+
+            // Cấu hình quan hệ 1-nhiều
+            modelBuilder.Entity<Category>()
+                .HasMany(c => c.Products)
+                .WithOne(p => p.Category)
+                .HasForeignKey(p => p.CategoryId);
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

@@ -8,8 +8,7 @@ namespace TechStore.API.Models
         [Key]
         public int Id { get; set; }
 
-        [Required]
-        [MaxLength(100)]
+        [Required, MaxLength(100)]
         public string Name { get; set; } = string.Empty;
 
         [Column(TypeName = "decimal(18,2)")]
@@ -18,5 +17,10 @@ namespace TechStore.API.Models
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         public DateTime? UpdatedAt { get; set; }
+
+        // FK to Category
+        public int CategoryId { get; set; }
+
+        public Category Category { get; set; } = null!;
     }
 }
