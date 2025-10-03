@@ -53,8 +53,12 @@ namespace TechStore.API.Repositories.Implementations
         public async Task<int> CountAsync(string? search)
         {
             var query = _context.Products.AsQueryable();
+            
             if (!string.IsNullOrWhiteSpace(search))
+            {
                 query = query.Where(p => p.Name.Contains(search));
+            }
+                
             return await query.CountAsync();
         }
     }
