@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TechStore.API.Data;
-using TechStore.API.Services.Interfaces;
+using TechStore.API.Repositories.Implementations;
+using TechStore.API.Repositories.Interfaces;
 using TechStore.API.Services.Implementations;
+using TechStore.API.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,8 +17,14 @@ builder.Services.AddDbContext<TechStoreDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Đăng ký Service vào DI Container
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ICustomerService, CustomerService>();
+
 
 // Cấu hình CORS (cho phép frontend truy cập API)
 builder.Services.AddCors(options =>

@@ -44,6 +44,19 @@ namespace TechStore.API.Data
 
                 context.Products.AddRange(products);
                 context.SaveChanges();
+
+                // Seed Customers
+                var customers = new[]
+                {
+                    new Customer { FullName = "Nguyễn Văn A", Email = "nguyenvana@email.com", PhoneNumber = "0912345678", Address = "123 Đường Lê Lợi, Quận 1, TP.HCM", CreatedAt = DateTime.UtcNow },
+                    new Customer { FullName = "Trần Thị B", Email = "tranthib@email.com", PhoneNumber = "0923456789", Address = "456 Đường Nguyễn Huệ, Quận 1, TP.HCM", CreatedAt = DateTime.UtcNow },
+                    new Customer { FullName = "Lê Văn C", Email = "levanc@email.com",PhoneNumber = "0934567890", Address = "789 Đường Pasteur, Quận 3, TP.HCM", CreatedAt = DateTime.UtcNow },
+                    new Customer { FullName = "Phạm Thị D", Email = "phamthid@email.com", PhoneNumber = "0945678901", Address = "321 Đường Cách Mạng Tháng 8, Quận 10, TP.HCM", CreatedAt = DateTime.UtcNow },
+                    new Customer { FullName = "Hoàng Văn E", Email = "hoangvane@email.com", PhoneNumber = "0956789012", Address = "654 Đường 3/2, Quận 10, TP.HCM", CreatedAt = DateTime.UtcNow }
+                 };
+
+                context.Customers.AddRange(customers);
+                context.SaveChanges();
             }
         }
     }

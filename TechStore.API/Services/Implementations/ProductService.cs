@@ -18,30 +18,30 @@ namespace TechStore.API.Services.Implementations
             var products = await _productRepository.GetAllAsync(pageNumber, pageSize, search);
             var total = await _productRepository.CountAsync(search);
 
-            return (products.Select(p => new ProductDto
+            return (products.Select(_product => new ProductDto
             {
-                Id = p.Id,
-                Name = p.Name,
-                Price = p.Price,
-                CategoryName = p.Category.Name
+                Id = _product.Id,
+                Name = _product.Name,
+                Price = _product.Price,
+                CategoryName = _product.Category.Name
             }), total);
         }
 
         public async Task<ProductDto?> GetByIdAsync(int id)
         {
-            var p = await _productRepository.GetByIdAsync(id);
+            var query = await _productRepository.GetByIdAsync(id);
 
-            if (p == null)
+            if (query == null)
             {
                 return null;
             }
 
             return new ProductDto
             {
-                Id = p.Id,
-                Name = p.Name,
-                Price = p.Price,
-                CategoryName = p.Category.Name
+                Id = query.Id,
+                Name = query.Name,
+                Price = query.Price,
+                CategoryName = query.Category.Name
             };
         }
 
